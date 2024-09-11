@@ -1,0 +1,15 @@
+SELAIN 						PALVELIN
+
+	HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+	----------------------------------------------------->
+
+			PALAUTTAA HTML KOODIN
+	
+	<-----------------------------------------------------
+
+	https://studies.cs.helsinki.fi/exampleapp/spa.js
+	--------------------------------------------------->
+
+	Palauttaa js filun joka kontrolloi sivun tapahtumia jatkossa
+
+	<-----------------------------------------------------	
