@@ -1,0 +1,17 @@
+
+käyttäjä luo uuden muistiinpanon:   
+
+ lähettää palvelimelle HTTP POST pyynnön eli haluaa LISÄTÄ muistiinpanon 
+ pyyntö lähetettiin palvelimen osoitteeseen new_note, mutta tämä ei ole single page app
+ niin muu sivulla oleva contentti ladattiin myös. 
+
+
+
+		
+	SELAIN  			PALVELIN
+
+	POST (uusi muistiinpano)
+	 >--------->----------->---------->------>
+	
+	lataa sivun uuden muistiinpanon kanssa
+	<---------<-------<-----<-----<----------<  
