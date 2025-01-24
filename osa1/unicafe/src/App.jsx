@@ -19,6 +19,9 @@ const App = () => {
   
   // tallennetaan kaikki klikit totaliin
   const [total, setTotal] = useState(0)
+  
+  let average = (good - bad) / total
+  let positive = good / total
 
   // Käsitellään klikkaukset hyvälle
   const handleGoodClick = () => {
@@ -47,8 +50,9 @@ const App = () => {
       <p>good {good}</p>
       <p>neutral {neutral}</p>
       <p>bad {bad}</p>
-      <p>total {total}</p>
-      <p>average {(good - bad) / total}</p>
+      <p>all {total}</p>
+      <p>average {average}</p>
+      <p>positive {positive * 100} %</p>
     </div>
   )
 }
