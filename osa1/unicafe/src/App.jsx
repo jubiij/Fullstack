@@ -10,18 +10,27 @@ const Button = (props) => (
   </button>
 )
 
+const StatisticsLine = (props) => {
+  return (
+    <div>
+      <p>{props.text} {props.value}</p>
+    </div>
+  )
+
+}
+
 const Statistics = (props) => {
   if (props.total === 0) {
     return "No feedback given"
   }
   return (
   <div>
-    <p>good {props.good}</p>
-    <p>neutral {props.neutral}</p>
-    <p>bad {props.bad}</p>
-    <p>all {props.total}</p>
-    <p>average {props.average}</p>
-    <p>positive {props.positive} %</p>
+    <StatisticsLine text="good" value={props.good}/>
+    <StatisticsLine text="neutral" value={props.neutral}/>
+    <StatisticsLine text="bad" value={props.bad}/>
+    <StatisticsLine text="total" value={props.total}/>
+    <StatisticsLine text="average" value={props.average}/>
+    <StatisticsLine text="positive" value={props.positive + ' %'} /> 
   </div>
   )
 }
@@ -55,6 +64,9 @@ const App = () => {
     setBad(bad + 1)
     setTotal(total + 1)
   }
+
+  // Buttonin olis voinu toteuttaa eritavalla ilman handleClick good/neutral/bad 
+  // esim: <Button handleClick={() => setGood(good + 1)} text="good"
 
   return (
     <div>
