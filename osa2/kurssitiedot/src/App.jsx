@@ -10,7 +10,6 @@ const App = () => {
   }
 
   const Header = ({ name }) => { 
-    console.log('mikäs on nimi', name)
     return <h1>{name}</h1>
   }
   
@@ -34,13 +33,17 @@ const App = () => {
     )
   }
   
-  const Total = () => {
+  const Total = ( {parts} ) => {
+    const total = parts.reduce((sum, part) => {
+      return sum + part.exercises
+    }, 0)
     return (
       <div>
-        <p>Number of exercises {course.parts[0].exercises + course.parts[1].exercises + course.parts[2].exercises}</p>
+        <p><b>total of {total} exercises</b></p>
       </div>
     )
   }
+ 
   
   const course = {
     name: 'Half Stack application development',
@@ -60,6 +63,11 @@ const App = () => {
         name: 'State of a component',
         exercises: 14,
         id: 3
+      },
+      {
+        name: 'Redux',
+        exercises: 11,
+        id: 4
       }
     ]
   }
