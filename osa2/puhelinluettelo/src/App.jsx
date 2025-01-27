@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import PersonForm from './components/PersonForm'
+import Filter from './components/Filter'
+import Persons from './components/Persons'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -42,38 +45,22 @@ const App = () => {
 
   return (
     <div>
+      
       <h2>Phonebook</h2>
-      <div>
-        filter shown with<input value={newFilter} onChange={handleFilterChange}/>
-      </div>
+      
+      <Filter value={newFilter} onChange={handleFilterChange}/>
+      
       <h2>add a new</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange} /> 
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange}/> 
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      
+      <PersonForm
+        onSubmit={addPerson} 
+        nameValue={newName}
+        onNameChange={handleNameChange}
+        numberValue={newNumber}
+        onNumberChange={handleNumberChange}                 
+      />
       <h2>Numbers</h2>
-      {persons.filter((item) => {
-        // tarkistetaan onko newFilter tyhjä
-        // newFilter.toLowerCase() === '' jos filter kenttä on tyhjä arvo on true
-        return newFilter.toLowerCase() === '' 
-        ? item  // ternary operator, jos suodatin on tyhjä eli palauttaa kaikkien henkilöiden nimet ja numerot
-        : item.name.toLowerCase().includes(newFilter) // jos suodatin ei ole tyhjä palautetaan true tai false. Sisältääkö newFilter henkilön nimeä (item.name)
-      })                                                
-      // kun filter on suodattanut henkilöt näytetään ne sivulla
-      .map((item) => (
-        <p key={item.name}> {item.name} {item.number}</p>
-      ))
-      }
-   
-   {/*    {persons.map(person => (
-      <p key={person.name}> {person.name} {person.number} </p> ))} */}
+      <Persons persons={persons}  newFilter={newFilter}/>
     </div>
   )
 
