@@ -7,15 +7,23 @@ const App = () => {
   const [newName, setNewName] = useState('')
 
   const addPerson = (event) => {
-    event.preventDefault()
-    setPersons(persons.concat({name: newName}))
-    setNewName('')
+    event.preventDefault() 
+    
+    // palauttaa true jos yksikin henkilö taulukossa täyttää ehdon ( person.name === newName)
+    const nameExists = persons.some(person => person.name === newName)
+
+    if(nameExists == true) {
+      window.alert(`${newName} is already added to phonebook`)
+    } else {
+      setPersons(persons.concat({name: newName}))
+      // tyhjentää lomakekentän
+      setNewName('')
+    }
   }
 
   const handleNameChange = (event) => {
     setNewName(event.target.value)
   }
-
 
   return (
     <div>
