@@ -3,6 +3,7 @@ import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 import Persons from './components/Persons'
 import axios from 'axios'
+import personService from './services/persons'
 const App = () => {
 
   const [persons, setPersons] = useState([])
@@ -11,25 +12,35 @@ const App = () => {
   const [newFilter, setFilter] = useState('')
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
+    personService
+      .getAll()
+        .then(initialPersons => {
+        setPersons(initialPersons)
       })
   }, [])
 
   const addPerson = (event) => {
     event.preventDefault() 
+    const personObject = {
+      name: newName,
+      number: newNumber
+    }
     
     // palauttaa true jos yksikin henkilö taulukossa täyttää ehdon ( person.name === newName)
     const nameExists = persons.some(person => person.name === newName)
     if(nameExists == true) {
       window.alert(`${newName} is already added to phonebook`)
     } else {
-      setPersons(persons.concat({name: newName, number: newNumber}))
-      // tyhjentää lomakekentän
-      setNewName('')
-      setNewNumber('')
+      personService
+        .create(personObject)
+          .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
+          
+          // tyhjentää lomakekentät
+          setNewName('')
+          setNewNumber('')
+        })
+ 
     }
   }
 
