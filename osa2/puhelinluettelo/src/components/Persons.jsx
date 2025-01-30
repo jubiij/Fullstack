@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const Persons = ({persons, setPersons, newFilter}) => {
+const Persons = ({persons, setPersons, newFilter, setErrorMessage}) => {
   
   const deleteHandler = (id, name) => {
     if (window.confirm(`Delete ${name} ?`)) {
@@ -8,6 +8,10 @@ const Persons = ({persons, setPersons, newFilter}) => {
       .delete(`http://localhost:3001/persons/${id}`)
       .then(() => {
         setPersons(persons.filter((person) => person.id !== id));
+        setErrorMessage(`Removed ${name}`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 2000)
       })
     } 
   }

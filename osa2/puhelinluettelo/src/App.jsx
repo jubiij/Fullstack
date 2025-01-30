@@ -2,14 +2,15 @@ import { useState, useEffect } from 'react'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 import Persons from './components/Persons'
-import axios from 'axios'
 import personService from './services/persons'
+import Notification from './components/Notification'
 const App = () => {
 
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setFilter] = useState('')
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     personService
@@ -35,12 +36,14 @@ const App = () => {
         .create(personObject)
           .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
-          
+          setErrorMessage(` Added ${personObject.name} `)
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 2000)
           // tyhjentää lomakekentät
           setNewName('')
           setNewNumber('')
         })
- 
     }
   }
 
@@ -60,7 +63,7 @@ const App = () => {
     <div>
       
       <h2>Phonebook</h2>
-      
+      <Notification message={errorMessage} />
       <Filter value={newFilter} onChange={handleFilterChange}/>
       
       <h2>add a new</h2>
@@ -73,7 +76,7 @@ const App = () => {
         onNumberChange={handleNumberChange}                 
       />
       <h2>Numbers</h2>
-      <Persons persons={persons} setPersons={setPersons}  newFilter={newFilter}/>
+      <Persons persons={persons} setPersons={setPersons}  newFilter={newFilter} setErrorMessage={setErrorMessage}/>
     </div>
   )
 
