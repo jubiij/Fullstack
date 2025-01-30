@@ -1,4 +1,17 @@
-const Persons = ({persons, newFilter}) => {
+import axios from 'axios'
+
+const Persons = ({persons, setPersons, newFilter}) => {
+  
+  const deleteHandler = (id, name) => {
+    if (window.confirm(`Delete ${name} ?`)) {
+    axios
+      .delete(`http://localhost:3001/persons/${id}`)
+      .then(() => {
+        setPersons(persons.filter((person) => person.id !== id));
+      })
+    } 
+  }
+  
   return(
   <div>
     {persons.filter((item) => {
@@ -10,8 +23,9 @@ const Persons = ({persons, newFilter}) => {
     })                                                
     // kun filter on suodattanut henkilöt näytetään ne sivulla
     .map((item) => (
-      <p key={item.name}> 
-        {item.name} {item.number}
+      <p key={item.id}> 
+        {item.name} {item.number} 
+        <button onClick={() => deleteHandler(item.id, item.name)}>delete</button>
       </p>
     ))}
   </div> 

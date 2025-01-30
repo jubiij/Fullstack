@@ -1,59 +1,14 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": "1"
+      "id": "cd21",
+      "name": "Matti Koskimaa",
+      "number": "12133332"
     },
     {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
-      "id": "2"
-    },
-    {
-      "name": "Dan Abramov",
-      "number": "12-43-234345",
-      "id": "3"
-    },
-    {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
-      "id": "4"
-    },
-    {
-      "id": "12ad",
+      "id": "87d3",
       "name": "Juho Anttila",
-      "number": "0401910891"
-    },
-    {
-      "id": "5b48",
-      "name": "juho anttila",
-      "number": ""
-    },
-    {
-      "id": "4a46",
-      "name": "Margit Anttila",
-      "number": "01210201"
-    },
-    {
-      "id": "cd3a",
-      "name": "Kaisu Anttila",
-      "number": "010123"
-    },
-    {
-      "id": "645a",
-      "name": "Elli Anttila",
-      "number": "123"
-    },
-    {
-      "id": "2bce",
-      "name": "Juho asdds",
-      "number": "1233133"
-    },
-    {
-      "id": "1635",
-      "name": "eero anttila",
-      "number": "123"
+      "number": "231231123"
     }
   ]
 }
