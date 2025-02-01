@@ -27,24 +27,47 @@ const App = () => {
       number: newNumber
     }
     
-    // palauttaa true jos yksikin henkilö taulukossa täyttää ehdon ( person.name === newName)
-    const nameExists = persons.some(person => person.name === newName)
-    if(nameExists == true) {
-      window.alert(`${newName} is already added to phonebook`)
+    const nameExists = persons.find(person => person.name === newName)
+    if(nameExists) {
+      if(window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+        const id = nameExists.id
+        const changedPerson = {...nameExists, number: newNumber}
+        personService
+          .update(id, changedPerson)
+            .then(returnedPerson => {
+              setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
+              setErrorMessage(`Number was changed for ${newName}`)
+              setTimeout(() => {
+                setErrorMessage(null)
+              }, 2000)
+            })
+            .catch(error => {
+              setErrorMessage(`Error updating ${newName}`)
+              setTimeout(() => {
+                setErrorMessage(null)
+              }, 2000)
+            })
+      }
     } else {
       personService
         .create(personObject)
           .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
-          setErrorMessage(` Added ${personObject.name} `)
+          setErrorMessage(` Added ${newName} `)
           setTimeout(() => {
             setErrorMessage(null)
-          }, 2000)
-          // tyhjentää lomakekentät
-          setNewName('')
-          setNewNumber('')
+          }, 2000)   
+        })
+        .catch(error => {
+          setErrorMessage(`error adding ${newName}`)
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 2000)   
         })
     }
+    // tyhjentää lomakekentät
+    setNewName('')
+    setNewNumber('')
   }
 
   const handleNameChange = (event) => {

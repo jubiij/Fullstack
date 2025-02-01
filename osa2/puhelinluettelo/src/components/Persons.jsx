@@ -13,6 +13,12 @@ const Persons = ({persons, setPersons, newFilter, setErrorMessage}) => {
           setErrorMessage(null)
         }, 2000)
       })
+      .catch(error => {
+        setErrorMessage(`error deleting ${name}`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 2000)   
+      })
     } 
   }
   
